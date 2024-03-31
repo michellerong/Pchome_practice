@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import Video from './Video'
+import Header from './Header'
 function Home() {
     return (
         <div className="wrapper">
             
             {/* 設定頁面title */}
            
-                <h2></h2>
-                <Video></Video>
+                <Header/>
+                <Video/>
         </div>
     );
 }

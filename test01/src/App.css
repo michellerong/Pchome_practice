@@ -37,8 +37,45 @@
   }
 }
 .short-container{
-  width: auto;
-  height: auto;
-  flex: auto;
-  background-color: beige;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center; /* 垂直居中 */
+  position: relative;
+  background-color: rgb(241, 243, 243);
+}
+.video-slide{
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+  height: 330px;
+  
+}
+.video{
+  margin-right: 40px;
+  margin-left: 40px;
+}
+.prev {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.next {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.header-container{
+  
+  display: flex;
+  padding-left: 50px;
+  padding-bottom: 30px;
+  padding-top: 10px;
+  background-color: rgb(241, 243, 243);
+}
+.ant-button{
+  color: #282c34;
 }
