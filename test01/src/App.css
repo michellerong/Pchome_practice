@@ -37,23 +37,29 @@
   }
 }
 .short-container{
-  display: flex;
+  position:relative;
+  justify-content: space-between;
   flex-direction: column;
-
   align-items: center; /* 垂直居中 */
-  position: relative;
   background-color: rgb(241, 243, 243);
 }
 .video-slide{
   display: flex;
-  justify-content: space-between;
   width: 500px;
   height: 330px;
-  
+  margin-left: 100px;
+  margin-right: 180px;
 }
 .video{
-  margin-right: 40px;
-  margin-left: 40px;
+  
+}
+.view-more{
+  display: flex;
+  justify-content: flex-end;
+}
+.carousel{
+  margin-left: 50px;
+  margin-right: 50px;
 }
 .prev {
   position: absolute;

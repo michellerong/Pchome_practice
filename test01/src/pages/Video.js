@@ -44,22 +44,24 @@ const VideoCarousel = () => {
 
   return (
     <div className="short-container">
+      <div className='view-more' ><Button type='link' onClick={handleViewMore}>查看更多</Button></div>
+      
       <Button className='prev' onClick={prevVideos} icon={<LeftOutlined />} />
       <Carousel className="carousel" afterChange={nextVideos}  slidesToShow={3} slidesToScroll={2} >
       
         {currentVideos.map((video, index) => (
           <div className="video-slide" key={index}>
             {video && (
-              <>
+              
             <ReactPlayer className="video" url={video.url} controls width='180px' height='320px' />
-            </>
+            
             )}
           </div>
         ))}
       </Carousel>
       <Button className='next' onClick={nextVideos} icon={<RightOutlined />} />
       
-      <Button onClick={handleViewMore}>查看更多</Button>
+      
       <VideoModal visible={modalVisible} onCancel={handleModalClose} videos={videosData} /> {/* 渲染模态框组件 */}
       
     </div>
