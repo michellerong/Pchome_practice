@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Video from './Video'
 import Header from './Header'
 function Home() {

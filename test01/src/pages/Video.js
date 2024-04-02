@@ -9,7 +9,7 @@ import videosData from './videodata.json'; // 假設路徑根據實際情況調�
 const VideoCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
-  const [currentVideo, setCurrentVideo] = useState(null);
+  // const [currentVideo, setCurrentVideo] = useState(null);
 
   const nextVideos = () => {
     const newIndex = (currentIndex + 3) % videosData.length;
@@ -29,10 +29,10 @@ const VideoCarousel = () => {
     currentVideos.push(null); // 在切片不足三个视频的情况下，添加一个空的元素
   }
 
-  const handleVideoClick = (video) => {
-    setCurrentVideo(video);
-    setModalVisible(true);
-  };
+  // const handleVideoClick = (video) => {
+  //   setCurrentVideo(video);
+  //   setModalVisible(true);
+  // };
 
   const handleModalClose = () => {
     setModalVisible(false);
@@ -51,7 +51,7 @@ const VideoCarousel = () => {
           <div className="video-slide" key={index}>
             {video && (
               <>
-            <ReactPlayer className="video" url={video.url} controls width='180px' height='320px' onClick={() => handleVideoClick(video)} />
+            <ReactPlayer className="video" url={video.url} controls width='180px' height='320px' />
             </>
             )}
           </div>
