@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Carousel, Button } from 'antd';
 import ReactPlayer from 'react-player';
-import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { LeftOutlined, RightOutlined,HeartTwoTone } from '@ant-design/icons';
 
 import VideoModal from './VideoModal';
 import videosData from './videodata.json'; // 假設路徑根據實際情況調整
@@ -44,22 +44,29 @@ const VideoCarousel = () => {
 
   return (
     <div className="short-container">
-      <div className='view-more' ><Button type='link' onClick={handleViewMore}>查看更多</Button></div>
       
-      <Button className='prev' onClick={prevVideos} icon={<LeftOutlined />} />
+      <div className='view-more' >
+      <div className='product-title'>人氣推薦商品Top3</div>
+        <Button type='link' onClick={handleViewMore}>查看更多</Button></div>
+      
+      {/* <Button className='prev' onClick={prevVideos} icon={<LeftOutlined />} /> */}
       <Carousel className="carousel" afterChange={nextVideos}  slidesToShow={3} slidesToScroll={2} >
       
         {currentVideos.map((video, index) => (
           <div className="video-slide" key={index}>
             {video && (
-              
+            <div >
             <ReactPlayer className="video" url={video.url} controls width='180px' height='320px' />
-            
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}><div className='link'><Button type="link"><a href={video.description}>{video.title}</a></Button> </div>
+            <HeartTwoTone twoToneColor="#eb2f96" />
+        <div>&nbsp;1.2萬</div>
+            </div>
+            </div>
             )}
           </div>
         ))}
       </Carousel>
-      <Button className='next' onClick={nextVideos} icon={<RightOutlined />} />
+      {/* <Button className='next' onClick={nextVideos} icon={<RightOutlined />} /> */}
       
       
       <VideoModal visible={modalVisible} onCancel={handleModalClose} videos={videosData} /> {/* 渲染模态框组件 */}
