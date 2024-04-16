@@ -119,13 +119,19 @@
 }
 
 .btn-more {
-  width: 90px;
+  width: 105px;
   height: 40px;
   margin-top: 20px;
-  margin-left: 785px;
+  margin-left: 770px;
   background-color: #fd0000;
 }
-
+:where(.css-dev-only-do-not-override-1uweeqc).ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover{
+  background: #ee5151;
+}
+:where(.css-dev-only-do-not-override-1uweeqc).ant-btn-text:not(:disabled):not(.ant-btn-disabled):hover{
+  color: #fd0000;
+  background-color: #f7d0d0;
+}
 
 .btn-buy {
   width: 144px;

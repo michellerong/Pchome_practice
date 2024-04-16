@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Carousel, Button, Checkbox, Image, Space, Dropdown } from 'antd';
+import { Carousel, Button, Checkbox, Image, Space, Dropdown,Modal } from 'antd';
 import ReactPlayer from 'react-player';
 import { LeftOutlined, RightOutlined, DownOutlined, HeartFilled } from '@ant-design/icons';
 
@@ -156,7 +156,15 @@ const VideoCarousel = () => {
 
             </Carousel>
             
-            <Button className='btn-more' type='primary' onClick={handleViewMore}>查看更多</Button>
+            <Button className='btn-more' type='primary' onClick={handleViewMore}>加入購物車</Button>
+            <Modal
+        title="訊息"
+        open={modalVisible}
+        onCancel={handleModalClose}
+        footer={null}
+      >
+        <p>已成功加入購物車！</p>
+      </Modal>
           </div>
           <><Image
             width={900}
@@ -177,7 +185,8 @@ const VideoCarousel = () => {
         </div>
 
 
-        <VideoModal visible={modalVisible} onCancel={handleModalClose} videos={videosData} /> {/* 渲染模态框组件 */}
+        {/* <VideoModal visible={modalVisible} onCancel={handleModalClose} videos={videosData} />  */}
+        {/* 渲染模态框组件 */}
 
       </div>
     </div>
