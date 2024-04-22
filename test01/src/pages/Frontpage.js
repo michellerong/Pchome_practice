@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { Button, Image } from 'antd';
 import { useHistory } from "react-router-dom";
 import ReactPlayer from 'react-player';
+import VideoModal from './VideoModal';
 import videosData from './videodata.json';
+import { YoutubeFilled} from '@ant-design/icons';
 const FrontPage = () => {
     
     const _history = useHistory();
@@ -22,7 +24,13 @@ const FrontPage = () => {
         _history.push('/Home')
         
       }
-
+      const [modalVisible, setModalVisible] = useState(false);
+      const handleViewMore = () => {
+          setModalVisible(true);
+      };
+      const handleModalClose = () => {
+        setModalVisible(false);
+      };
 
     return (
 
@@ -40,7 +48,10 @@ const FrontPage = () => {
                 <div className='center-left'>
                 
                     <div className="one-video" >
-                <div>
+                <div >
+                <div className='shortvideotitle' style={{fontSize:'17px',marginBottom:'5px',fontWeight:'bold'}}>今日促銷
+                <Button className='moreshort' icon={<YoutubeFilled />}  preview={false} onClick={handleViewMore}></Button>
+                </div>
                 {videosData[currentIndex] && (
                 <ReactPlayer className="video" url={videosData[currentIndex].url} controls width='180px' height='340px' />
                 )}
@@ -62,8 +73,9 @@ const FrontPage = () => {
                         preview={false}>
                     </Image>
                 </div>
-            </div>
+            </div><VideoModal visible={modalVisible} onCancel={handleModalClose} videos={videosData} />
         </div>
+        
     );
 
 }

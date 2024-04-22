@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button,Tag } from 'antd';
 import ReactPlayer from 'react-player';
-import { LeftOutlined, RightOutlined,HeartTwoTone } from '@ant-design/icons';
+import { LeftOutlined, RightOutlined,HeartFilled } from '@ant-design/icons';
 
 const VideosModal = ({ visible, onCancel, videos }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -20,14 +20,19 @@ const VideosModal = ({ visible, onCancel, videos }) => {
     <Modal
       open={visible}
       onCancel={onCancel}
+      width={700}
+      height={1200}
       footer={null}
     >
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <ReactPlayer url={videos[currentIndex].url} controls width='180px' height='320px'/>
-        
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent:'space-between'}}>
+          <Button className='prevmodal' onClick={prevVideo} icon={<LeftOutlined />}></Button>
+        <ReactPlayer url={videos[currentIndex].url} controls width='270px' height='480px'/>
+        <Button className='nextmodal' onClick={nextVideo} icon={<RightOutlined />}></Button>
+        </div>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
           <Button type="link"><a href={videos[currentIndex].description}>{videos[currentIndex].title}</a></Button>
-        <HeartTwoTone twoToneColor="#eb2f96" />
+        <HeartFilled style={{ color: "#ea1717" }} />
         <div>&nbsp;1.2萬</div>
         
         {/* <Button type="link" href={videos[currentIndex].link}>{videos[currentIndex].description}</Button> */}
@@ -36,10 +41,11 @@ const VideosModal = ({ visible, onCancel, videos }) => {
      <Tag>#筆電</Tag>
      <Tag>#多人推薦</Tag>
      <Tag>#耐用</Tag></div>
+     
+      
        </div>
       
-        <Button className='prev' onClick={prevVideo} icon={<LeftOutlined />}></Button>
-        <Button className='next' onClick={nextVideo} icon={<RightOutlined />}></Button>
+        
       
     </Modal>
   );

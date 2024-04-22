@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import { Carousel, Button, Checkbox, Image, Space, Dropdown,Modal } from 'antd';
+import { Carousel, Button, Checkbox, Image, Space, Dropdown, Modal, Typography } from 'antd';
 import ReactPlayer from 'react-player';
 import { LeftOutlined, RightOutlined, DownOutlined, HeartFilled } from '@ant-design/icons';
 
 import VideoModal from './VideoModal';
 import videosData from './videodata.json'; // 假設路徑根據實際情況調整
-
-const VideoCarousel = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [modalVisible, setModalVisible] = useState(false);
-  // const [currentVideo, setCurrentVideo] = useState(null);
-
-  /* 下拉式選單加購數量*/
+const EachVideo= ({video,index})=>{
+  const [checkboxChecked, setCheckboxChecked] = useState(false);
+  const handleCheckboxChange = (e) => {
+    setCheckboxChecked(!checkboxChecked);
+    setQuantity(null); // 清除選擇的數量
+  };
+  const [quantity, setQuantity] = useState(null);
+  /* CheckBox */
   const items = [
     {
       key: '1',
@@ -30,19 +31,58 @@ const VideoCarousel = () => {
       label: '4',
     },
   ];
-  const [quantity, setQuantity] = useState(null);
-  /* CheckBox */
-  const [checkboxChecked, setCheckboxChecked] = useState(false);
-  const handleCheckboxChange = (e) => {
-    setCheckboxChecked(e.target.checked);
-    setQuantity(null); // 清除選擇的數量
-  };
   const plainOptions = ['1', '2', '3'];
   const handleMenuClick = ({ key }) => {
 
     setQuantity(parseInt(key, 10));
 
   };
+  return(
+    <div className="video-slide" key={index}>
+    {video && (
+      <div >
+        <ReactPlayer className="video" url={video.url} controls width='180px' height='320px' />
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+          <Checkbox checked={checkboxChecked} onChange={handleCheckboxChange} />
+          <div className='link'><Typography className='videotitle'>{video.title}</Typography> </div>
+          <HeartFilled style={{ color: "#ea1717" }} />
+          <div>&nbsp;1.2萬</div>
+        </div>
+        <div>
+          <Dropdown
+            menu={{
+              overlayStyle: { width: 'auto' },
+              items,
+              onClick: handleMenuClick
+            }}
+            disabled={!checkboxChecked}
+          >
+            <Button><a onClick={(e) => e.preventDefault()}>
+              <Space>
+                {quantity || '請選擇數量'}
+                <DownOutlined />
+              </Space>
+            </a></Button>
+          </Dropdown>
+
+        </div><div style={{ fontSize: '15px', marginTop: '10px' }}>選擇加購{quantity}件商品</div>
+
+      </div>
+
+    )}
+
+  </div>
+  )
+ 
+}
+const VideoCarousel = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [modalVisible, setModalVisible] = useState(false);
+  // const [currentVideo, setCurrentVideo] = useState(null);
+
+  /* 下拉式選單加購數量*/
+ 
+  
 
   const nextVideos = () => {
     const newIndex = (currentIndex + 3) % videosData.length;
@@ -117,61 +157,27 @@ const VideoCarousel = () => {
 
             <Carousel className="carousel" afterChange={nextVideos} slidesToShow={3} slidesToScroll={2} >
               {currentVideos.map((video, index) => (
-                <div className="video-slide" key={index}>
-                  {video && (
-                    <div >
-                      <ReactPlayer className="video" url={video.url} controls width='180px' height='320px' />
-                      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                        <Checkbox checked={checkboxChecked} onChange={handleCheckboxChange} />
-                        <div className='link'><Button type="link"><a href={video.description}>{video.title}</a></Button> </div>
-                        <HeartFilled style={{ color: "#eb2f96" }} />
-                        <div>&nbsp;1.2萬</div>
-                      </div>
-                      <div>
-                        <Dropdown
-                          menu={{
-                            overlayStyle: { width: 'auto' },
-                            items,
-                            onClick: handleMenuClick
-                          }}
-                          disabled={!checkboxChecked}
-                        >
-                          <Button><a onClick={(e) => e.preventDefault()}>
-                            <Space>
-                              {quantity || '請選擇數量'}
-                              <DownOutlined />
-                            </Space>
-                          </a></Button>
-                        </Dropdown>
-
-                      </div><div style={{ fontSize: '15px', marginTop: '10px' }}>選擇加購{quantity}件商品</div>
-
-                    </div>
-
-
-                  )}
-                  
-                </div>
+                <EachVideo video={video} index={index}></EachVideo>
               ))}
 
             </Carousel>
-            
+
             <Button className='btn-more' type='primary' onClick={handleViewMore}>加入購物車</Button>
             <Modal
-        title="訊息"
-        open={modalVisible}
-        onCancel={handleModalClose}
-        footer={null}
-      >
-        <p>已成功加入購物車！</p>
-      </Modal>
+              title="訊息"
+              open={modalVisible}
+              onCancel={handleModalClose}
+              footer={null}
+            >
+              <p>已成功加入購物車！</p>
+            </Modal>
           </div>
           <><Image
             width={900}
             height={500}
             src="product-more.png"
             preview={false}
-            style={{marginLeft:'30px'}}>
+            style={{ marginLeft: '30px' }}>
 
           </Image></>
           <><Image
@@ -179,7 +185,7 @@ const VideoCarousel = () => {
             height={500}
             src="product-more2.png"
             preview={false}
-            style={{marginLeft:'30px'}}>
+            style={{ marginLeft: '30px' }}>
 
           </Image></>
         </div>

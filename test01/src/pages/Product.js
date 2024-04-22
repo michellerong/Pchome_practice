@@ -1,8 +1,16 @@
-import React from 'react';
-import { Image, Tag, Button } from "antd";
-const Product = () => {
+import React, { useState } from 'react';
+import { Image, Modal, Button } from "antd";
 
+const Product = () => {
+    const [modalVisible, setModalVisible] = useState(false);
+    const handleViewMore = () => {
+        setModalVisible(true);
+    };
+    const handleModalClose = () => {
+        setModalVisible(false);
+    };
     return (
+
         <div className='product-container'>
 
             <Image.PreviewGroup
@@ -34,10 +42,18 @@ const Product = () => {
             </div>
 
             <div className='btn-container'>
-<Button className='btn-cart' type="text" >加入購物車</Button>
-<Button className='btn-buy' type="primary">立即購買</Button>
+                <Button className='btn-cart' type="text" onClick={handleViewMore}>加入購物車</Button>
+                <Button className='btn-buy' type="primary">立即購買</Button>
+                <Modal
+                    title="訊息"
+                    open={modalVisible}
+                    onCancel={handleModalClose}
+                    footer={null}
+                >
+                    <p>已成功加入購物車！</p>
+                </Modal>
             </div>
-            
+
         </div>
     );
 
