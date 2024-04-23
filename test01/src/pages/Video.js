@@ -178,7 +178,7 @@ const VideoCarousel = () => {
             src="product-more.png"
             preview={false}
             style={{ marginLeft: '30px' }}>
-
+ 
           </Image></>
           <><Image
             width={900}
