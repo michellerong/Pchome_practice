@@ -175,7 +175,7 @@ const VideoCarousel = () => {
           <><Image
             width={900}
             height={500}
-            src={"https://pchome-practice.vercel.app/"+"product-more.png"}
+            src="product-more.png"
             preview={false}
             style={{ marginLeft: '30px' }}>
 
