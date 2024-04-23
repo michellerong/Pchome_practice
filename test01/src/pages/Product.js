@@ -3,11 +3,18 @@ import { Image, Modal, Button } from "antd";
 
 const Product = () => {
     const [modalVisible, setModalVisible] = useState(false);
+    const [modalVisible2, setModalVisible2] = useState(false);
     const handleViewMore = () => {
         setModalVisible(true);
     };
+    const handleViewMoreFinish = () => {
+        setModalVisible2(true);
+    };
     const handleModalClose = () => {
         setModalVisible(false);
+    };
+    const handleModalCloseFinish = () => {
+        setModalVisible2(false);
     };
     return (
 
@@ -43,7 +50,7 @@ const Product = () => {
 
             <div className='btn-container'>
                 <Button className='btn-cart' type="text" onClick={handleViewMore}>加入購物車</Button>
-                <Button className='btn-buy' type="primary">立即購買</Button>
+                <Button className='btn-buy' type="primary" onClick={handleViewMoreFinish}>立即購買</Button>
                 <Modal
                     title="訊息"
                     open={modalVisible}
@@ -51,6 +58,14 @@ const Product = () => {
                     footer={null}
                 >
                     <p>已成功加入購物車！</p>
+                </Modal>
+                <Modal
+                    title="訊息"
+                    open={modalVisible2}
+                    onCancel={handleModalCloseFinish}
+                    footer={null}
+                >
+                    <p>為您導入結帳畫面~</p>
                 </Modal>
             </div>
 
